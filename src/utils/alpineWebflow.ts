@@ -11,7 +11,7 @@ class AlpineJSWebflow {
     window.Webflow = window.Webflow || [];
     window.Webflow.push(() => {
       this.init();
-      Alpine.start();
+      window.Alpine.start();
     });
   }
 
@@ -30,6 +30,7 @@ class AlpineJSWebflow {
     const template = document.createElement('template');
 
     const attributes = this.getAlpineAttributes(el);
+
     attributes.forEach((a) => {
       template.setAttribute(a.name, a.value);
       el.removeAttribute(a.name);
@@ -85,7 +86,7 @@ class AlpineJSWebflow {
 
     document
       .querySelectorAll<HTMLElement>('[x-data] [x-for], [x-data] [x-if]')
-      .forEach(this.wrapInTemplate);
+      .forEach((el) => this.wrapInTemplate(el));
   }
 }
 
