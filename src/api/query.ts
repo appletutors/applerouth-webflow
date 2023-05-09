@@ -1,4 +1,5 @@
 // TODO: Error handling
+import type { GeolocationAPIResponse, GeolocationQueryParams } from './geolocationQueryTypes';
 
 type APIBody = Record<string, unknown>;
 

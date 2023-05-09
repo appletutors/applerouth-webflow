@@ -1,6 +1,7 @@
 import Alpine from 'alpinejs';
 
-import { GeolocationQuery, type GeolocationQueryParams } from '$api/geolocationQuery';
+import { GeolocationQuery } from '$api/geolocationQuery';
+import type { GeolocationQueryParams } from '$api/geolocationQueryTypes';
 
 /**
  * Goals:
@@ -46,13 +47,13 @@ class Geolocation {
             zipcode: this.zipInput,
           };
 
-          const response = new GeolocationQuery(apiBody).processQuery();
+          const response = new GeolocationQuery(apiBody).sendQuery();
 
           Alpine.store('geolocation').update(
-            response.data.abbr,
-            response.data.id,
-            response.data.city,
-            response.data.state
+            response.abbr,
+            response.id,
+            response.city,
+            response.state
           );
         },
       }));
