@@ -1,18 +1,11 @@
-// TODO: auto load local v/s uploaded version
-// TODO: auto-add main geolocation model to all pages body element
-// TODO: create a common Event query class and another base query class that sends API queries to the applerouth server
-
-// isLocal Window property type
-
-const JS_SCRIPTS_HEAP: Set<string> = new Set();
+window.JS_SCRIPTS = new Set();
 const LOCALHOST_BASE = 'http://localhost:3000/';
 const EXTERNAL_SERVER_LOAD_BASE = '';
-const JS_LOAD_EVENT_NAME = 'load-js';
 
 /**
- * Sets an object `window.isLocal` and dispatches event when checking is done to load all the scripts respectively
+ * Sets an object `window.isLocal` and adds all the set scripts using the `window.JS_SCRIPTS` Set
  */
-const setJSSource = () => {
+const addJS = () => {
   window.isLocal = false;
   fetch(LOCALHOST_BASE)
     .then((response) => {
@@ -21,10 +14,10 @@ const setJSSource = () => {
       }
     })
     .finally(() => {
-      // window.dispatchEvent(new Event(JS_LOAD_EVENT_NAME));
-      JS_SCRIPTS_HEAP.forEach((url) => {
+      const base = window.isLocal ? LOCALHOST_BASE : EXTERNAL_SERVER_LOAD_BASE;
+      window.JS_SCRIPTS?.forEach((url) => {
         const script = document.createElement('script');
-        script.src = url;
+        script.src = base + url;
         script.defer = true;
         document.body.appendChild(script);
       });
@@ -32,25 +25,4 @@ const setJSSource = () => {
 };
 
 // init
-setJSSource();
-
-/**
- * Loads a script
- * @param path The path of the script to load
- */
-const addJS = (path: [string]) => {
-  const base = window.isLocal ? LOCALHOST_BASE : EXTERNAL_SERVER_LOAD_BASE;
-
-  path.forEach((scriptPath) => {
-    JS_SCRIPTS_HEAP.add(base + scriptPath);
-  });
-
-  // window.addEventListener(JS_LOAD_EVENT_NAME, () => {
-  //   // JS_LOAD_HEAP.forEach((url) => {
-  //     const script = document.createElement('script');
-  //     script.src = url;
-  //     script.defer = true;
-  //     document.body.appendChild(script);
-  //   // });
-  // });
-};
+addJS();
