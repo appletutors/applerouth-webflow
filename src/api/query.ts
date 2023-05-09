@@ -1,4 +1,4 @@
-// TODO: Error handling
+import type { EventsAPIResponse, EventsQueryParams } from './eventQueryTypes';
 import type { GeolocationAPIResponse, GeolocationQueryParams } from './geolocationQueryTypes';
 
 type APIBody = Record<string, unknown>;
