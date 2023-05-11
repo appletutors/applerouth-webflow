@@ -3,8 +3,6 @@ import type { GeolocationAPIResponse, GeolocationQueryParams } from './geolocati
 
 type APIBody = Record<string, unknown>;
 
-type QueryParams = Record<string, unknown>;
-
 type EmptyResponseData = [];
 type APIResponseData = (EventsAPIResponse | GeolocationAPIResponse)[];
 

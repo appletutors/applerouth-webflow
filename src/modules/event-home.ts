@@ -19,7 +19,7 @@ class EventHome {
 
         apiBody: {
           category: ['marketing_event'],
-          // market: window.Alpine.store('geolocation').id,
+          market: window.Alpine.store('geolocation').id,
         },
 
         // event slider data-attributes
