@@ -1,10 +1,8 @@
 /* eslint-disable @typescript-eslint/no-this-alias */
-import type SliderElement from '@finsweet/ts-utils';
-import type { Webflow } from '@finsweet/ts-utils';
-
 import EventQuery from '$api/eventQuery';
 import type { EventsAPIResponse, EventsQueryParams } from '$api/eventQueryTypes';
 import { getDateTimeRange } from '$utils/getDateTimeRange';
+import { reInitSliders } from '$utils/reinitSliders';
 
 class EventHome {
   constructor() {
@@ -12,7 +10,7 @@ class EventHome {
   }
 
   public createAlpineData(): void {
-    const self = this;
+    // const self = this;
 
     window.addEventListener('alpine:init', () => {
       window.Alpine.data('eventsHome', () => ({
@@ -28,9 +26,6 @@ class EventHome {
         eventsHomeSlide: {
           [':key']() {
             return this.event.id;
-          },
-          ['aria-label'](): string {
-            return `${index + 1} of ${this.events.length}`;
           },
         },
 
@@ -50,35 +45,17 @@ class EventHome {
             return;
           }
 
-          console.log('setting events');
           this.events = responseData;
+          console.log('events set');
           await this.$nextTick;
-          self.refreshSlider();
+          reInitSliders();
         },
 
         getDateTime(start: string, end: string): Record<string, unknown> {
           return getDateTimeRange(start, end);
         },
       }));
-
-      // window.Alpine.bind('eventsHomeSlide', () => ({
-      //   // ':key'(): number {
-      //   //   return event.id;
-      //   // },
-
-      //   'aria-label'(): string {
-      //     return `${index + 1} of ${this.events.length}`;
-      //   },
-      // }));
     });
-  }
-
-  /**
-   * Refresh Swiper Slider with new event items
-   */
-  public refreshSlider(): void {
-    console.log('slider redraw');
-    window.Webflow.require('slider').redraw();
   }
 }
 
