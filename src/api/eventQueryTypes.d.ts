@@ -17,16 +17,16 @@ export type EventsQueryParams = {
 };
 
 export type EventsAPIResponse = {
-  id?: number;
-  name?: string;
-  type?: string;
-  description?: string;
-  event_code?: string;
-  is_online?: boolean;
+  id: number;
+  name: string;
+  type: string;
+  description: string;
+  event_code: string;
+  is_online: boolean;
   test_date?: Date | null;
-  starts_at?: Date;
-  ends_at?: Date;
-  price?: string;
+  starts_at: Date;
+  ends_at: Date;
+  price: string;
   class_schedule?: {
     first_session_date: Date;
     final_session_date: Date;
@@ -35,15 +35,15 @@ export type EventsAPIResponse = {
     instructional_time: number;
     sessions_count: number;
   };
-  tags?: [string];
-  markets?: [1];
-  topics?: [string];
-  days_of_week?: [string];
-  address?: string;
-  presenters?: [string] | null;
-  location_id?: number;
-  location_name?: string;
-  google_maps_url?: string;
-  extended_time_available?: boolean | null;
-  event_page_url?: string;
+  tags: [string];
+  markets: [1];
+  topics: [string];
+  days_of_week: [string];
+  address: string;
+  presenters: [string] | null;
+  location_id: number;
+  location_name: string;
+  google_maps_url: string;
+  extended_time_available: boolean | null;
+  event_page_url: string;
 };
