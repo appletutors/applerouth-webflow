@@ -1,8 +1,15 @@
 /* eslint-disable @typescript-eslint/no-this-alias */
 
-import { GeolocationQuery } from '$api/geolocationQuery';
+import GeolocationQuery from '$api/geolocationQuery';
 import type { GeolocationQueryParams } from '$api/geolocationQueryTypes';
-import { getLocationByIP } from '$api/ipQuery';
+// import { getLocationByIP } from '$api/ipQuery';
+
+interface GeolocationStore {
+  abbr: string;
+  id: number;
+  city: string;
+  state: string;
+}
 
 /**
  * Goals:
@@ -11,39 +18,42 @@ import { getLocationByIP } from '$api/ipQuery';
  */
 class Geolocation {
   constructor() {
-    this.getLocation();
     this.registerAlpineStore();
     this.createAlpineData();
+
+    // document.addEventListener('alpine:init', () => {
     this.getLocation();
+    // });
   }
 
   public registerAlpineStore(): void {
     const self = this;
+    const defaultLocation = this.getDefaultLocation();
 
-    document.addEventListener('alpine:init', () => {
-      window.Alpine.store('geolocation', {
-        abbr: '',
-        id: '',
-        city: '',
-        state: '',
+    // document.addEventListener('alpine:init', () => {
+    window.Alpine.store('geolocation', {
+      abbr: '',
+      id: window.Alpine.$persist(defaultLocation.id).as('location_id'),
+      city: '',
+      state: '',
 
-        init() {
-          if ('' !== this.id) {
-            console.log('Geolocation ID already present in store - ', this.id);
-            return;
-          }
+      init() {
+        if ('' !== this.id && !this.id.initialValue) {
+          console.log('Geolocation ID already set - ', this.id);
+          return;
+        }
 
-          self.getLocation();
-        },
+        self.getLocation();
+      },
 
-        update(abbr: string, id: number, city: string, state: string) {
-          this.abbr = abbr;
-          this.id = id;
-          this.city = city;
-          this.state = state;
-        },
-      });
+      update(abbr: string, id: number, city: string, state: string) {
+        this.abbr = abbr;
+        this.id = id;
+        this.city = city;
+        this.state = state;
+      },
     });
+    // });
   }
 
   public createAlpineData(): void {
@@ -54,7 +64,14 @@ class Geolocation {
         zipInput: '',
         showError: false,
         locationName() {
-          return `${this.$store.geolocation.city}, ${this.$store.geolocation.state}`;
+          const { state } = this.$store.geolocation;
+          let suffix = '';
+
+          if ('' !== state) {
+            suffix = `, ${state}`;
+          }
+
+          return `${this.$store.geolocation.city}${suffix}`;
         },
 
         runQuery() {
@@ -84,7 +101,23 @@ class Geolocation {
    * Sets the default geolocation market - "Other"
    */
   public setDefaultLocation(): void {
-    this.updateAlpineStore('Other', 4, '', '');
+    const defaultLocation = this.getDefaultLocation();
+
+    this.updateAlpineStore(
+      defaultLocation.abbr,
+      defaultLocation.id,
+      defaultLocation.city,
+      defaultLocation.state
+    );
+  }
+
+  private getDefaultLocation(): GeolocationStore {
+    return {
+      abbr: 'Other',
+      id: 4,
+      city: 'Other',
+      state: '',
+    };
   }
 }
 

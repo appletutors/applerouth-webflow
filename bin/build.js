@@ -10,6 +10,7 @@ const PRODUCTION = process.env.NODE_ENV === 'production';
 const ENTRY_POINTS = [
   'src/index.ts',
   'src/utils/alpineWebflow.ts',
+  'src/modules/geolocation.ts',
   'src/modules/event-home.ts',
   // 'src/modules/geolocation.ts',
 ];

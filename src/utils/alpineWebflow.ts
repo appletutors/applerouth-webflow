@@ -1,3 +1,4 @@
+import persist from '@alpinejs/persist';
 import Alpine from 'alpinejs';
 
 /**
@@ -7,6 +8,7 @@ import Alpine from 'alpinejs';
 class AlpineJSWebflow {
   constructor() {
     window.Alpine = Alpine;
+    Alpine.plugin(persist);
 
     window.Webflow = window.Webflow || [];
     window.Webflow.push(() => {

@@ -1,6 +1,9 @@
 lockfileVersion: '6.0'
 
 dependencies:
+  '@alpinejs/persist':
+    specifier: ^3.12.1
+    version: 3.12.1
   '@finsweet/ts-utils':
     specifier: ^0.39.1
     version: 0.39.1
@@ -59,6 +62,10 @@ devDependencies:
     version: 5.0.3
 
 packages:
+
+  /@alpinejs/persist@3.12.1:
+    resolution: {integrity: sha512-yhzxOywR6QnWwdRiXlFYIsSoF7KVyVYyorXCVZTO1kIN4lsvv5P+2mpa/b/LSjjAkeqmoTziLdYh6RHZSkhECQ==}
+    dev: false
 
   /@babel/code-frame@7.21.4:
     resolution: {integrity: sha512-LYvhNKfwWSPpocw8GI7gpK2nq3HSDuEPC/uSYaALSJu9xjsalaaYFOq0Pwt5KmVqwEbZlDu81aLXwBOmD/Fv9g==}

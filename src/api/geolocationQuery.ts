@@ -10,3 +10,5 @@ export class GeolocationQuery extends QueryAPI {
     this.API_BODY = apiBody;
   }
 }
+
+export default GeolocationQuery;
