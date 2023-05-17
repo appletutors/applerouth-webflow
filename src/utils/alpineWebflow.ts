@@ -10,11 +10,16 @@ class AlpineJSWebflow {
     window.Alpine = Alpine;
     Alpine.plugin(persist);
 
-    window.Webflow = window.Webflow || [];
-    window.Webflow.push(() => {
+    // window.Webflow = window.Webflow || [];
+    // window.Webflow.push(() => {
+
+    // Execute after all scripts are loaded
+    window.addEventListener('load', () => {
       this.init();
       window.Alpine.start();
     });
+
+    // });
   }
 
   private getAlpineAttributes(el: HTMLElement) {
