@@ -1,8 +1,8 @@
 /**
  * Events slider for the homepage
+ *
+ * Component name - `eventsHome`
  */
-
-// TODO: extract the name of the component out to a class variable to make it easier to view
 
 /* eslint-disable @typescript-eslint/no-this-alias */
 import EventQuery from '$api/eventQuery';
@@ -11,6 +11,8 @@ import { getDateTimeRange } from '$utils/getDateTimeRange';
 import { reInitSliders } from '$utils/reinitSliders';
 
 class EventHome {
+  COMPONENT_NAME = 'eventsHome';
+
   constructor() {
     this.createAlpineData();
   }
@@ -19,7 +21,7 @@ class EventHome {
     // const self = this;
 
     window.addEventListener('alpine:init', () => {
-      window.Alpine.data('eventsHome', () => ({
+      window.Alpine.data(this.COMPONENT_NAME, () => ({
         noResponse: false,
         events: {},
 

@@ -4,6 +4,8 @@
  * The user can change the location by adding ZIP code in a form (the Webflow component)
  *
  * Uses localstorage to sync the location across pages and visits
+ *
+ * Component & Store Name - `geolocation`
  */
 
 /* eslint-disable @typescript-eslint/no-this-alias */
@@ -25,21 +27,21 @@ interface GeolocationStore {
  * 2. Set the appropriate location on the store, which is used as the central location point
  */
 class Geolocation {
+  COMPONENT_NAME = 'geolocation';
+  STORE_NAME = 'geolocation';
+
   constructor() {
     this.registerAlpineStore();
     this.createAlpineData();
 
-    // document.addEventListener('alpine:init', () => {
     this.getLocation();
-    // });
   }
 
   public registerAlpineStore(): void {
     const self = this;
     const defaultLocation = this.getDefaultLocation();
 
-    // document.addEventListener('alpine:init', () => {
-    window.Alpine.store('geolocation', {
+    window.Alpine.store(this.STORE_NAME, {
       abbr: '',
       id: window.Alpine.$persist(defaultLocation.id).as('location_id'),
       city: '',
@@ -61,14 +63,13 @@ class Geolocation {
         this.state = state;
       },
     });
-    // });
   }
 
   public createAlpineData(): void {
     const self = this;
 
     document.addEventListener('alpine:init', () => {
-      window.Alpine.data('geolocation', () => ({
+      window.Alpine.data(this.COMPONENT_NAME, () => ({
         zipInput: '',
         showError: false,
         locationName() {
