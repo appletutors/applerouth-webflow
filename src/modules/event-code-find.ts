@@ -1,3 +1,9 @@
+/**
+ * "Find by Event Code" component
+ * Includes a form with an input to enter the event code
+ * Expected to redirect to the specific event code page in OneCanoe when a correct event code is entered
+ */
+
 /* eslint-disable @typescript-eslint/no-this-alias */
 import EventQuery from '$api/eventQuery';
 import type { EventsAPIResponse, EventsQueryParams } from '$api/eventQueryTypes';

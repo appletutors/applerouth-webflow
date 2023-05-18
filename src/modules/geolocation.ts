@@ -1,3 +1,11 @@
+/**
+ * Component to update geolocation
+ * Initially automatically determined either via browser coordinates sharing or IP address
+ * The user can change the location by adding ZIP code in a form (the Webflow component)
+ *
+ * Uses localstorage to sync the location across pages and visits
+ */
+
 /* eslint-disable @typescript-eslint/no-this-alias */
 
 import GeolocationQuery from '$api/geolocationQuery';
