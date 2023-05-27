@@ -13,6 +13,7 @@ const ENTRY_POINTS = [
   'src/modules/geolocation.ts',
   'src/modules/events-home.ts',
   'src/modules/event-code-find.ts',
+  'src/modules/webinars-featured.ts',
 ];
 
 // Config dev serving
