@@ -11,13 +11,23 @@ import EventQuery from '$api/eventQuery';
 import type { EventsAPIResponse, EventsQueryParams } from '$api/eventQueryTypes';
 
 class EventCodeFind {
+  /**
+   * Alpine Component Name
+   */
   COMPONENT_NAME = 'eventCodeFind';
+
+  /**
+   * Timeout in milliseconds for the error state
+   */
   ERROR_ANIMATION_TIMEOUT_IN_MS = 700;
 
   constructor() {
     this.createAlpineData();
   }
 
+  /**
+   * Creates an AlpineJS component for event code and sets its functionalities
+   */
   public createAlpineData(): void {
     const self = this;
 
@@ -27,6 +37,10 @@ class EventCodeFind {
         isLoading: false,
         eventCode: '',
 
+        /**
+         * Queries the API to check for an existing event for the given code
+         * @returns void Redirects to the event page in case of a successful response
+         */
         async processQuery() {
           const apiBody: EventsQueryParams = {
             category: ['all'],

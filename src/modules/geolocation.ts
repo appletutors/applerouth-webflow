@@ -109,6 +109,10 @@ class Geolocation {
     });
   }
 
+  /**
+   * Updates the Alpine Store with the specified location parameters
+   * This will then trigger an update on all the modules that are using the store value
+   */
   public updateAlpineStore(abbr: string, id: number, city: string, state: string) {
     window.Alpine.store('geolocation').update(abbr, id, city, state);
   }
@@ -133,6 +137,9 @@ class Geolocation {
     );
   }
 
+  /**
+   * Returns the default location - "Other"
+   */
   private getDefaultLocation(): GeolocationStore {
     return {
       abbr: 'Other',

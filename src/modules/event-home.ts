@@ -37,6 +37,9 @@ class EventHome {
           },
         },
 
+        /**
+         * Initializes the event query and sets a watcher to re-trigger the query when geolocation store changes in the API Body
+         */
         init() {
           this.processQuery();
 
@@ -45,6 +48,10 @@ class EventHome {
           });
         },
 
+        /**
+         * Queries the API to fetch events with the specified parameters
+         * @returns void Sets the events and re-initializes the slider
+         */
         async processQuery() {
           const responseData = (await new EventQuery(this.apiBody).sendQuery()) as
             | EventsAPIResponse[]
