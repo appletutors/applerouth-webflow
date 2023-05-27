@@ -28,7 +28,7 @@ class EventHome {
 
       window.Alpine.data(this.COMPONENT_NAME, () => ({
         noResponse: false,
-        events: {},
+        events: [],
 
         apiBody: API_BODY,
 
