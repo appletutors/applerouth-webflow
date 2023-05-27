@@ -1,10 +1,18 @@
+export interface DateTimeRange {
+  startDate: string;
+  endDate: string;
+  startTime: string;
+  endTime: string;
+  timeRange: string;
+}
+
 /**
  * Splits event response start and end times into separate date and time strings
  * @param start the `starts_at` timestring
  * @param end the `ends_at` timestring
  * @returns An object containing start and end date and times.
  */
-export function getDateTimeRange(start: string, end: string): Record<string, unknown> {
+export function getDateTimeRange(start: string, end: string): DateTimeRange {
   const startDate = new Date(start);
   const endDate = new Date(end);
 
