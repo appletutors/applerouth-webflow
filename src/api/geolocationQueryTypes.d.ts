@@ -6,5 +6,8 @@ export type GeolocationQueryParams = {
 };
 
 export type GeolocationAPIResponse = {
-  any: any;
+  abbr: string;
+  id: number;
+  city: string;
+  state: string;
 };

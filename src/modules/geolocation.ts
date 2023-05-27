@@ -11,7 +11,7 @@
 /* eslint-disable @typescript-eslint/no-this-alias */
 
 import GeolocationQuery from '$api/geolocationQuery';
-import type { GeolocationQueryParams } from '$api/geolocationQueryTypes';
+import type { GeolocationAPIResponse, GeolocationQueryParams } from '$api/geolocationQueryTypes';
 // import { getLocationByIP } from '$api/ipQuery';
 
 interface GeolocationStore {
@@ -83,14 +83,27 @@ class Geolocation {
           return `${this.$store.geolocation.city}${suffix}`;
         },
 
-        runQuery() {
+        async runQuery() {
           const apiBody: GeolocationQueryParams = {
             type: 'zip',
             zipcode: this.zipInput,
           };
 
-          const response = new GeolocationQuery(apiBody).sendQuery();
-          self.updateAlpineStore(response.abbr, response.id, response.city, response.state);
+          const responseData = (await new GeolocationQuery(apiBody).sendQuery()) as
+            | GeolocationAPIResponse[]
+            | [];
+
+          if (!responseData.length) {
+            console.warn('Geolocation query failed', { responseData });
+            return;
+          }
+
+          self.updateAlpineStore(
+            responseData.abbr,
+            responseData.id,
+            responseData.city,
+            responseData.state
+          );
         },
       }));
     });

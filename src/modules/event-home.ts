@@ -18,17 +18,17 @@ class EventHome {
   }
 
   public createAlpineData(): void {
-    // const self = this;
-
     window.addEventListener('alpine:init', () => {
+      const API_BODY: EventsQueryParams = {
+        category: ['marketing_event'],
+        market: window.Alpine.store('geolocation').id,
+      };
+
       window.Alpine.data(this.COMPONENT_NAME, () => ({
         noResponse: false,
         events: {},
 
-        apiBody: {
-          category: ['marketing_event'],
-          market: window.Alpine.store('geolocation').id,
-        },
+        apiBody: API_BODY,
 
         // event slider data-attributes
         eventsHomeSlide: {
@@ -46,7 +46,9 @@ class EventHome {
         },
 
         async processQuery() {
-          const responseData = await new EventQuery(this.apiBody).sendQuery();
+          const responseData = (await new EventQuery(this.apiBody).sendQuery()) as
+            | EventsAPIResponse[]
+            | [];
 
           if (!responseData.length) {
             this.noResponse = true;

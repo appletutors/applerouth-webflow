@@ -12,12 +12,15 @@ import type { EventsAPIResponse, EventsQueryParams } from '$api/eventQueryTypes'
 
 class EventCodeFind {
   COMPONENT_NAME = 'eventCodeFind';
+  ERROR_ANIMATION_TIMEOUT_IN_MS = 700;
 
   constructor() {
     this.createAlpineData();
   }
 
   public createAlpineData(): void {
+    const self = this;
+
     window.addEventListener('alpine:init', () => {
       window.Alpine.data(this.COMPONENT_NAME, () => ({
         isError: false,
@@ -32,7 +35,9 @@ class EventCodeFind {
 
           this.isLoading = true;
 
-          const responseData: EventsAPIResponse[] | [] = await new EventQuery(apiBody).sendQuery();
+          const responseData = (await new EventQuery(apiBody).sendQuery()) as
+            | EventsAPIResponse[]
+            | [];
 
           if (!responseData.length) {
             this.isLoading = false;
@@ -45,7 +50,7 @@ class EventCodeFind {
               this.isError = false;
               this.eventCode = '';
               this.$refs.eventCodeInput.focus();
-            }, 500);
+            }, self.ERROR_ANIMATION_TIMEOUT_IN_MS);
             return;
           }
 
