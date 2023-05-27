@@ -10,7 +10,7 @@ import type { EventsAPIResponse, EventsQueryParams } from '$api/eventQueryTypes'
 import { type DateTimeRange, getDateTimeRange } from '$utils/getDateTimeRange';
 import { reInitSliders } from '$utils/reinitSliders';
 
-class EventHome {
+class WebinarsFeatured {
   COMPONENT_NAME = 'webinarsFeatured';
 
   constructor() {
@@ -94,4 +94,4 @@ class EventHome {
   }
 }
 
-new EventHome();
+new WebinarsFeatured();
