@@ -14,6 +14,7 @@ const ENTRY_POINTS = [
   'src/modules/events-home.ts',
   'src/modules/event-code-find.ts',
   'src/modules/webinars-featured.ts',
+  'src/modules/webinars-upcoming.ts',
 ];
 
 // Config dev serving
