@@ -11,7 +11,7 @@ const ENTRY_POINTS = [
   'src/index.ts',
   'src/utils/alpineWebflow.ts',
   'src/modules/geolocation.ts',
-  'src/modules/event-home.ts',
+  'src/modules/events-home.ts',
   'src/modules/event-code-find.ts',
 ];
 
